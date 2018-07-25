@@ -144,7 +144,7 @@ Hello, Welcome to</h1>
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off" name="login_email"/>
+            <input type="text"required autocomplete="off" name="login_email"/>
           </div>
           
           <div class="field-wrap">
