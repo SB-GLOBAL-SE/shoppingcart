@@ -144,14 +144,14 @@ Hello, Welcome to</h1>
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="text"required autocomplete="off" name="login_email"/>
+            <input type="text" required autocomplete="off" name="login_email"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off" name="login_password"/>
+            <input type="password" required autocomplete="off" name="login_password"/>
           </div>
           
           <p class="forgot"><a href="#">Forgot Password?</a></p>
@@ -185,14 +185,14 @@ Hello, Welcome to</h1>
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off" name="email"/>
+            <input type="text" required autocomplete="off" name="email"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Set A Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off" name="password"/>
+            <input type="password" required autocomplete="off" name="password"/>
           </div>
           
           <button type="submit" class="button button-block"/>Get Started</button>
