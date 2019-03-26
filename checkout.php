@@ -7,6 +7,24 @@ include('session.php');
 include 'Cart.php';
 $cart = new Cart;
 
+if (isset($_POST['Submit']))
+    {
+
+    // code for check server side validation
+
+    if (empty($_SESSION['captcha_code']) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) != 0)
+        {
+        $msg = "<span style='color:red'>The CAPTCHA text does not match!</span>"; // Captcha verification is incorrect.
+        }
+      else
+        { // Captcha verification is Correct. Final Code Execute here!
+
+        // $msg="<span style='color:green'>The Validation code has been matched with Captcha -  " . $_SESSION['captcha_code'] . "</span>";
+
+        header("Location:cartAction.php?action=placeOrder");
+        }
+    }
+
 // redirect to home if cart is empty
 if($cart->total_items() <= 0){
     header("Location: index.php");
@@ -35,12 +53,69 @@ $custRow = $query->fetch_assoc();
     .footBtn{width: 95%;float: left;}
     .orderBtn {float: right;}
     </style>
+<script type="text/javascript">
+    function refreshCaptcha(){
+    var img = document.images['captchaimg'];
+    img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;
+}
+    function myFunctionn() {
+    var x = document.getElementById("myDIVV");
+    var y = document.getElementById("myDIV");
+    
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    var y = document.getElementById("myDIVV");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+            y.style.display = "none";
+
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
 </head>
 <body>
 <?php include("header.php"); ?>
   <form autocomplete="off" action="cartAction.php" method="post">
 <div class="container">
-    <h1>Order Preview</h1>
+        <h1>Order Preview</h1>
+
+    <a href="welcome.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
+    <a href="print.php" class="btn btn-warning"><i class="glyphicon glyphicon-print"></i> Print Order</a>
+    </br>
+        </br>
+
+
+     <?php
+
+if (isset($msg))
+    {
+?>
+   <tr>
+<!--       <td colspan="2" align="center" valign="top"><?php
+    echo $msg;
+?></td> -->
+<div class="alert alert-danger" role="alert">
+  <?php
+    echo $msg;
+    // echo '<script type="text/javascript">myFunctionn();</script>';
+?>
+</div>
+    </tr>
+    <?php
+    }
+
+?>
     <table class="table">
     <thead>
         <tr>
@@ -84,13 +159,13 @@ $custRow = $query->fetch_assoc();
         <p><?php echo $custRow['address']; ?></p>
     </div>
     <div class="footBtn">
-        <a href="welcome.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
       <!-- </br>
       </br> -->
         <a  onclick="myFunction()" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay with Card<i class="glyphicon glyphicon-menu-right"></i></a>
       <!-- </br>
       </br> -->
-        <a href="cartAction.php?action=placeOrder" class="btn btn-success">Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
+        <a href="cartAction.php?action=placeOrder" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
+        <a onclick="myFunctionn()" class="btn btn-success">Secure Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
         <!-- <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a> -->
     </div>
 </div>
@@ -153,6 +228,21 @@ $custRow = $query->fetch_assoc();
                                 </div>
                             </form>
 </div>
+
+<form action="" method="post" name="form1" id="form1" >
+<div id="myDIVV" class="text-center" style="margin:auto;width: 50%;display: none;" >
+    <div class="panel panel-success ">
+        <div class="panel-heading">Captcha Text</div>
+        <div class="panel-body">
+            <img src="captcha.php?rand=<?php echo rand();?>" id='captchaimg'><br />
+            <label for='message'>Enter the code above here :</label><br />
+            <input id="captcha_code" name="captcha_code" type="text"><br />Can't read the image? click 
+            <a href='javascript: refreshCaptcha();'>here</a> to refresh.
+            </div>
+    </div>
+    <input name="Submit" type="submit" onclick="" value="Secure Checkout" class="btn btn-success btn-block">
+</div>
+
 </body>
   <script  src="js/index.js"></script>
 </html>
