@@ -158,16 +158,13 @@ if (isset($msg))
         <p><?php echo $custRow['phone']; ?></p>
         <p><?php echo $custRow['address']; ?></p>
     </div>
-    <div class="footBtn">
+    <!-- <div class="footBtn"> -->
       <!-- </br>
       </br> -->
-        <a  onclick="myFunction()" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay with Card<i class="glyphicon glyphicon-menu-right"></i></a>
-      <!-- </br>
-      </br> -->
-        <a href="cartAction.php?action=placeOrder" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
-        <a onclick="myFunctionn()" class="btn btn-success">Secure Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
+        <!-- <a  onclick="myFunction()" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay with Card<i class="glyphicon glyphicon-menu-right"></i></a> -->
+
         <!-- <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a> -->
-    </div>
+    <!-- </div> -->
 </div>
 <div id="myDIV" style="display:none;width: 30%;margin: 0 auto;">
   <input name="action" value="placeOrdercc" hidden="true" >
@@ -228,7 +225,21 @@ if (isset($msg))
                                 </div>
                             </form>
 </div>
-
+<div style="margin: auto; width: 50%; padding: 10px;"> 
+<button onclick="myFunction()"class="btn btn-success">Pay with Card</button>
+<!-- </br>
+</br> -->
+  <!-- <a href="cartAction.php?action=placeOrder" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a> -->
+  <button onclick="placeorder()" type="button" class="btn btn-success">Pay offline & Place Order</button>
+  <!-- <a onclick="myFunctionn()" class="btn btn-success">Secure Pay offline & Place Order <i class="glyphicon glyphicon-menu-right"></i></a> -->
+  <button onclick="myFunctionn()" type="button" class="btn btn-success">Secure Pay offline & Place Order</button>
+  <script>
+      function placeorder()
+      {
+          location.href = "cartAction.php?action=placeOrder";
+      } 
+  </script>
+</div>
 <form action="" method="post" name="form1" id="form1" >
 <div id="myDIVV" class="text-center" style="margin:auto;width: 50%;display: none;" >
     <div class="panel panel-success ">
